@@ -6,7 +6,7 @@ var express = require("express"),
     errorHandler = require('errorhandler'),
     methodOverride = require('method-override'),
     hostname = process.env.HOSTNAME || 'prebid-perf-test.herokuapp.com',
-    port = parseInt(process.env.PORT, 10) || 80,
+    port = parseInt(process.env.PORT, 10) || 5000,
     publicDir = process.argv[2] || __dirname + '/',
     path = require('path');
 
@@ -26,4 +26,4 @@ app.use(errorHandler({
 }));
 
 console.log("Simple static server showing %s listening at http://%s:%s", publicDir, hostname, port);
-app.listen(hostname, port);
+app.listen(port, hostname);
