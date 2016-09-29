@@ -1,0 +1,239 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<script>
+(function() {
+var v = location.search.substr(1);
+if (!(/^\d+(-canary)?$/.test(v))) return;
+var u = 'https://3p.ampproject.net/'+encodeURIComponent(v)+'/f.js';
+document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
+})();
+</script>
+<script>
+        var rightSlotSizes = [[300, 250], [300, 600], [300, 250], [100, 100]];
+//        var googletag = googletag || {};
+//        googletag.cmd = googletag.cmd || [];
+
+        var pbjs = pbjs || {};
+        pbjs.que = pbjs.que || [];
+        var PREBID_TIMEOUT = 1000;
+
+        var date = new Date().getTime();
+
+        function loadPrebidJS(initAdserver) {
+
+
+        // Load GPT when timeout is reached.
+        setTimeout(initAdserver, PREBID_TIMEOUT);
+
+
+        pbjs.que.push(function () {
+
+            pbjs.logging = true;
+
+            var adUnits = [
+                {
+                    code: '/19968336/header-bid-tag-1',
+                    sizes: rightSlotSizes,
+                    bids: [
+                        {
+                            bidder: 'appnexusAst',
+                            params: {
+                                placementId: '4799418',
+                                dealId: 'some deal!'
+                            }
+                        }
+                    ]
+                },
+                {
+                    code: '/19968336/header-bid-tag-2',
+                    sizes: rightSlotSizes,
+                    bids: [
+                        {
+                            bidder: 'indexExchange',
+                            params: {
+                                id: '1',
+                                siteID: 123456,
+                                timeout: 3000
+                            }
+                        }
+                    ]
+                }
+            ];
+
+            pbjs.addAdUnits(adUnits);
+
+            pbjs.bidderSettings =
+            {
+                appnexusAst: {
+                    bidCpmAdjustment: function (bidCpm) {
+                        return 10.00;
+                    },
+
+                    alwaysUseBid: true,
+                    adserverTargeting: [
+                        {
+                            key: "hb_bidder",
+                            val: function (bidResponse) {
+                                return bidResponse.bidderCode;
+                            }
+                        }, {
+                            key: "hb_adid",
+                            val: function (bidResponse) {
+                                return bidResponse.adId;
+                            }
+                        }, {
+                            key: "hb_pb",
+                            val: function (bidResponse) {
+                                //hard code to 5 - so we show ad
+                                return bidResponse.pbMg;
+                                //return  (Math.floor(Math.min(bidResponse.cpm,40) * 40) / 40).toFixed(2);
+                            }
+                        }, {
+                            key: "hb_size",
+                            val: function (bidResponse) {
+                                return bidResponse.size;
+
+                            }
+                        }
+                    ]
+
+                },
+                standard: {
+                    adserverTargeting: [
+                        {
+                            key: "hb_bidder",
+                            val: function (bidResponse) {
+                                return bidResponse.bidderCode;
+                            }
+                        }, {
+                            key: "hb_adid",
+                            val: function (bidResponse) {
+                                return bidResponse.adId;
+                            }
+                        }, {
+                            key: "hb_pb",
+                            val: function (bidResponse) {
+                                //change default here
+                                return '10.00';
+                            }
+                        }, {
+                            key: "hb_size",
+                            val: function (bidResponse) {
+                                return bidResponse.size;
+
+                            }
+                        },
+                        {
+                            key: "foobar",
+                            val: function (bidResponse) {
+                                return bidResponse.size;
+
+                            }
+                        }
+                    ]
+
+                }
+            };
+
+            // Optional: excepted values are `medium` (default), `low` and `high`
+            pbjs.setPriceGranularity('medium');
+
+            pbjs.requestBids({
+                bidsBackHandler: function (bidResponses) {
+                    initAdserver();
+                },
+//                timeout: 3000
+            });
+
+        });
+
+//        (function () {
+//            var d = document, pbs = d.createElement("script"), pro = d.location.protocal;
+//            pbs.type = "text/javascript";
+//            //pbs.src = 'http://mkendall.devnxs.net/prebid.min.js'
+////            pbs.src = 'build/dev/prebid.js';
+//            pbs.src = 'https://localhost:9999/build/dev/prebid.js';
+//            var target = document.getElementsByTagName("head")[0];
+//            target.insertBefore(pbs, target.firstChild);
+//        })();
+
+//        load GPT library here
+//        (function () {
+//            var gads = document.createElement('script');
+//            gads.async = true;
+//            gads.type = 'text/javascript';
+//            var useSSL = 'https:' == document.location.protocol;
+//            gads.src = (useSSL ? 'https:' : 'http:') +
+//                    '//www.googletagservices.com/tag/js/gpt.js';
+//            var node = document.getElementsByTagName('script')[0];
+//            node.parentNode.insertBefore(gads, node);
+//        })();
+
+//        googletag.cmd.push(function () {
+//            var slot1 = googletag.defineSlot('/19968336/header-bid-tag-1', rightSlotSizes, 'div-1').addService(googletag.pubads());
+
+            pbjs.que.push(function () {
+                // example of event API 'on' and `bidWon` event handling
+//                pbjs.onEvent('bidWon', logWinningBid, '/19968336/header-bid-tag-4');
+
+                // example of setup for run time bidder adapter config
+//                amznads.setTargetingForGPTAsync('amznslots');
+
+                console.log('Targeting params:');
+                console.log(pbjs.getAdserverTargeting());
+
+                console.log('Dumping all bid objects to console:');
+                console.log(pbjs.getBidResponses());
+            });
+
+            // This allows us to load Prebid and GPT in parallel
+//            googletag.pubads().disableInitialLoad();
+//            googletag.pubads().enableSingleRequest();
+//            googletag.enableServices();
+//        })
+
+       (function () {
+            var d = document, pbs = d.createElement("script"), pro = d.location.protocal;
+            pbs.type = "text/javascript";
+            //pbs.src = 'http://mkendall.devnxs.net/prebid.min.js'
+//            pbs.src = 'build/dev/prebid.js';
+            pbs.src = 'https://localhost:9999/build/dev/prebid.js';
+            var target = document.getElementsByTagName("head")[0];
+            target.insertBefore(pbs, target.firstChild);
+        })();
+    }
+
+    function initAdserver() {
+            if (pbjs.initAdserverSet) return;
+
+//            googletag.cmd.push(function () {
+                pbjs.que.push(function () {
+                    pbjs.enableSendAllBids();
+                    pbjs.setTargetingForGPTAsync();
+                    //                    googletag.pubads().refresh();
+                });
+//            });
+
+            pbjs.initAdserverSet = true;
+        }
+</script>
+</head>
+<body style="margin:0">
+<div id="c" style="position:absolute;top:0;left:0;bottom:0;right:0;">
+  <script>
+    draw3p(function(config, done) {
+        if (window.context && window.context.isMaster) {
+           loadPrebidJS(initAdserver);
+        } else {
+            config.targeting = pbjs.getAdserverTargeting()[config.slot];
+            done(config);
+        }
+    }, ['doubleclick'], ['prebidapp.com']);
+  </script>
+</div>
+<script>if (window.docEndCallback) window.docEndCallback()</script>
+</body>
+</html>
