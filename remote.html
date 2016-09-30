@@ -12,17 +12,17 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
 })();
 </script>
 <script>
-        var rightSlotSizes = [[300, 250], [300, 600], [300, 250], [100, 100]];
+    var rightSlotSizes = [[300, 250], [300, 600], [300, 250], [100, 100]];
 //        var googletag = googletag || {};
 //        googletag.cmd = googletag.cmd || [];
 
-        var pbjs = pbjs || {};
-        pbjs.que = pbjs.que || [];
-        var PREBID_TIMEOUT = 1000;
+    var pbjs = pbjs || {};
+    pbjs.que = pbjs.que || [];
+    var PREBID_TIMEOUT = 1000;
 
-        var date = new Date().getTime();
+    var date = new Date().getTime();
 
-        function loadPrebidJS(initAdserver) {
+    function loadPrebidJS(initAdserver, config, done) {
 
 
         // Load GPT when timeout is reached.
@@ -144,6 +144,8 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
             pbjs.requestBids({
                 bidsBackHandler: function (bidResponses) {
                     initAdserver();
+                    config.targeting = pbjs.getAdserverTargeting()[config.adSlot];
+                    done(config);
                 },
 //                timeout: 3000
             });
@@ -212,7 +214,7 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
 //            googletag.cmd.push(function () {
                 pbjs.que.push(function () {
                     pbjs.enableSendAllBids();
-                    pbjs.setTargetingForGPTAsync();
+//                    pbjs.setTargetingForGPTAsync();
                     //                    googletag.pubads().refresh();
                 });
 //            });
@@ -226,7 +228,7 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
   <script>
     draw3p(function(config, done) {
         if (window.context && window.context.isMaster) {
-           loadPrebidJS(initAdserver);
+           loadPrebidJS(initAdserver, config, done);
         } else {
             config.targeting = pbjs.getAdserverTargeting()[config.slot];
             done(config);
