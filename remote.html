@@ -18,7 +18,7 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
 
     var pbjs = pbjs || {};
     pbjs.que = pbjs.que || [];
-    var PREBID_TIMEOUT = 1000;
+    var PREBID_TIMEOUT = 10000;
 
     var date = new Date().getTime();
 
@@ -26,7 +26,7 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
 
 
         // Load GPT when timeout is reached.
-        setTimeout(initAdserver, PREBID_TIMEOUT);
+        setTimeout(initAdserver.bind(null, config, done), PREBID_TIMEOUT);
 
 
         pbjs.que.push(function () {
@@ -144,7 +144,7 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
             pbjs.requestBids({
                 bidsBackHandler: function (bidResponses) {
                     initAdserver();
-                    config.targeting = pbjs.getAdserverTargeting()[config.adSlot];
+                    config.targeting = pbjs.getAdserverTargeting()[config.slot];
                     done(config);
                 },
 //                timeout: 3000
@@ -208,7 +208,7 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
         })();
     }
 
-    function initAdserver() {
+    function initAdserver(config, done) {
             if (pbjs.initAdserverSet) return;
 
 //            googletag.cmd.push(function () {
@@ -216,6 +216,8 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
                     pbjs.enableSendAllBids();
 //                    pbjs.setTargetingForGPTAsync();
                     //                    googletag.pubads().refresh();
+                    config.targeting = pbjs.getAdserverTargeting()[config.slot];
+                    done(config);
                 });
 //            });
 
@@ -227,11 +229,16 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
 <div id="c" style="position:absolute;top:0;left:0;bottom:0;right:0;">
   <script>
     draw3p(function(config, done) {
+        console.log(config.type);
         if (window.context && window.context.isMaster) {
-           loadPrebidJS(initAdserver, config, done);
+            loadPrebidJS(initAdserver, config, done);
         } else {
-            config.targeting = pbjs.getAdserverTargeting()[config.slot];
-            done(config);
+            window.context.computeInMasterFrame(window, 1, function() {
+                pbjs.que.push(function() {
+                    config.targeting = pbjs.getAdserverTargeting()[config.slot];
+                    done(config);
+                });
+            });
         }
     }, ['doubleclick'], ['prebidapp.com']);
   </script>
