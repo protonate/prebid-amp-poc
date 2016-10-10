@@ -1,6 +1,8 @@
 # prebid-amp-poc
 
-To run the POC, clone this repo and Prebid.js. The current config expects these  
+To run the POC, clone this repo and Prebid.js. In the Prebid repo check out the `poc/prebid-sandbox` branch.   
+
+The current config expects these  
 hosts listening on loopback:  
 ```
 prebidapp.com  
