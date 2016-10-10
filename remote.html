@@ -87,7 +87,7 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
             {
                 appnexusAst: {
                     bidCpmAdjustment: function (bidCpm) {
-                        return 10.00;
+                        return 12.00;
                     },
 
                     alwaysUseBid: true,
@@ -225,7 +225,7 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
         })();
     }
 
-    function initAdserver(config, done) {
+    function setTargeting(config, done) {
         pbjs.que.push(function() {
             config.targeting = getTargeting(config.slot);
             done(config);
@@ -239,6 +239,7 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
                 targeting[key] = [targeting[key]];
             }
         }
+        targeting['prebid_amp'] = ['true'];
         return targeting;
     }
 </script>
@@ -248,15 +249,17 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
   <script>
     draw3p(function(config, done) {
         if (window.context && window.context.isMaster) {
-            loadPrebidJS(initAdserver.bind(null, config, done));
+            loadPrebidJS(setTargeting.bind(null, config, done));
         } else {
             window.context.computeInMasterFrame(window, 1, function() {
-              console.log('computing in master frame');
                 pbjs.que.push(function() {
+                  pbjs.onEvent('bidWon', function() {
                     console.log('BID WON EVENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-                    config.targeting = getTargeting(config.slot);
-                    done(config);
+                  });
                 });
+            }, function() {
+                  config.targeting = getTargeting(config.slot);
+                  done(config);
             });
         }
     }, ['doubleclick'], ['prebidapp.com']);
