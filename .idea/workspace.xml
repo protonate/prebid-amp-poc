@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="17f5e646-b74f-4258-9bb6-864c01a25702" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/creative.html" afterPath="$PROJECT_DIR$/creative.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/remote.html" afterPath="$PROJECT_DIR$/remote.html" />
     </list>
     <ignored path="prebid-test-app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -58,8 +60,8 @@
       <file leaf-file-name="creative.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/creative.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+            <state relative-caret-position="400">
+              <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -68,8 +70,8 @@
       <file leaf-file-name="remote.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/remote.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5875">
-              <caret line="235" column="20" selection-start-line="235" selection-start-column="20" selection-end-line="235" selection-end-column="20" />
+            <state relative-caret-position="-1180">
+              <caret line="157" column="81" selection-start-line="157" selection-start-column="81" selection-end-line="157" selection-end-column="81" />
               <folding>
                 <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -81,8 +83,8 @@
       <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+            <state relative-caret-position="475">
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -101,9 +103,9 @@
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_16" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_17" />
         <option value="$PROJECT_DIR$/amp-test.html" />
-        <option value="$PROJECT_DIR$/remote.html" />
         <option value="$PROJECT_DIR$/mockAds.html" />
         <option value="$PROJECT_DIR$/creative.html" />
+        <option value="$PROJECT_DIR$/remote.html" />
         <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
@@ -846,8 +848,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/remote.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5875">
-          <caret line="235" column="20" selection-start-line="235" selection-start-column="20" selection-end-line="235" selection-end-column="20" />
+        <state relative-caret-position="-1180">
+          <caret line="157" column="81" selection-start-line="157" selection-start-column="81" selection-end-line="157" selection-end-column="81" />
           <folding>
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -857,16 +859,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/creative.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+        <state relative-caret-position="400">
+          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+        <state relative-caret-position="475">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding />
         </state>
       </provider>

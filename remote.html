@@ -27,7 +27,6 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
 
         // Load GPT when timeout is reached.
         setTimeout(function() {
-            console.log('remote.html setTimeout');
             return initAdserver;
         }(), PREBID_TIMEOUT);
 
@@ -166,53 +165,7 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
                 },
                 timeout: 3000
             });
-
         });
-
-//        (function () {
-//            var d = document, pbs = d.createElement("script"), pro = d.location.protocal;
-//            pbs.type = "text/javascript";
-//            //pbs.src = 'http://mkendall.devnxs.net/prebid.min.js'
-////            pbs.src = 'build/dev/prebid.js';
-//            pbs.src = 'https://localhost:9999/build/dev/prebid.js';
-//            var target = document.getElementsByTagName("head")[0];
-//            target.insertBefore(pbs, target.firstChild);
-//        })();
-
-//        load GPT library here
-//        (function () {
-//            var gads = document.createElement('script');
-//            gads.async = true;
-//            gads.type = 'text/javascript';
-//            var useSSL = 'https:' == document.location.protocol;
-//            gads.src = (useSSL ? 'https:' : 'http:') +
-//                    '//www.googletagservices.com/tag/js/gpt.js';
-//            var node = document.getElementsByTagName('script')[0];
-//            node.parentNode.insertBefore(gads, node);
-//        })();
-
-//        googletag.cmd.push(function () {
-//            var slot1 = googletag.defineSlot('/19968336/header-bid-tag-1', rightSlotSizes, 'div-1').addService(googletag.pubads());
-
-//            pbjs.que.push(function () {
-//                // example of event API 'on' and `bidWon` event handling
-////                pbjs.onEvent('bidWon', logWinningBid, '/19968336/header-bid-tag-4');
-//
-//                // example of setup for run time bidder adapter config
-////                amznads.setTargetingForGPTAsync('amznslots');
-//
-//                console.log('Targeting params:');
-//                console.log(pbjs.getAdserverTargeting());
-//
-//                console.log('Dumping all bid objects to console:');
-//                console.log(pbjs.getBidResponses());
-//            });
-
-            // This allows us to load Prebid and GPT in parallel
-//            googletag.pubads().disableInitialLoad();
-//            googletag.pubads().enableSingleRequest();
-//            googletag.enableServices();
-//        })
 
        (function () {
             var d = document, pbs = d.createElement("script"), pro = d.location.protocal;
@@ -263,7 +216,6 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
         if (window.context && window.context.isMaster) {
             loadPrebidJS();
         }
-        console.log('config: ', config);
         window.context.master.adCalls.push(setTargeting.bind(null, config, done));
     }, ['doubleclick'], ['prebidapp.com']);
   </script>

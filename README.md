@@ -14,8 +14,10 @@ Load this url in chrome with mobile emulation:
 
 https://prebidapp.com:5000/amp-test.html#development=1
 
-You should see an AppNexus Prebid.js ad in each of the two `amp-ad` components on the page.
+You should see an AppNexus Prebid.js ad in each of the two `amp-ad` components on the page. It
+may take a few page reloads. Currently two DFP trafficked AppNexus Prebid ads are returned but
+only one of them gets rendered.
 
 Remaining issues:
 -[X] Render multiple ad placements
--[ ] render bugs  
+-[ ] render bugs

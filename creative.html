@@ -1,9 +1,9 @@
 <!-- This script tag should be returned by your ad server -->
-<!-- `adServerDomain` should be set appropriately -->
+<!-- `hostDomain` should be set appropriately below, and TODO as a targeting key/value -->
 
 <script>
   var rendered = false;
-  var adServerDomain = 'https://securepubads.g.doubleclick.net';
+  var hostDomain = 'https://amp.prebidapp.com:5000';
 
   var renderAd = function (ev) {
     var key = ev.message ? "message" : "data";
@@ -30,7 +30,7 @@
       message: 'request ad',
       adId: '%%PATTERN:hb_adid%%'
     });
-    window.parent.postMessage(message, adServerDomain);
+    window.parent.postMessage(message, hostDomain);
   };
 
   var listenAdFromPrebid = function () {
