@@ -22,7 +22,7 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
 
     var date = new Date().getTime();
 
-    function loadPrebidJS(initAdserver) {
+    function loadPrebidJS() {
 
 
         // Load GPT when timeout is reached.
@@ -226,14 +226,14 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
     }
 
     function setTargeting(config, done) {
-        pbjs.que.push(function() {
-            config.targeting = getTargeting(config.slot);
-            done(config);
-        });
+        console.log('setTargeting for ', config.slot);
+        console.log('bid requests: ', window.context.master.pbjs._bidsRequested);
+        config.targeting = getTargeting(config.slot);
+        done(config);
     }
 
     function getTargeting(slot) {
-        var targeting = pbjs.getAdserverTargeting()[slot];
+        var targeting = window.context.master.pbjs.getAdserverTargeting()[slot];
         for (var key in targeting) {
             if (targeting.hasOwnProperty(key)) {
                 targeting[key] = [targeting[key]];
@@ -242,26 +242,29 @@ document.write('<script'+' src="'+encodeURI(u)+'"><'+'/script>');
         targeting['prebid_amp'] = ['true'];
         return targeting;
     }
+
+    function initAdserver() {
+      var i;
+      var adCalls = window.context.master.adCalls;
+      var adCallsLength = adCalls.length;
+      for (i = 0; i < adCallsLength; i++) {
+        adCalls.pop()();
+      }
+    }
 </script>
 </head>
 <body style="margin:0">
 <div id="c" style="position:absolute;top:0;left:0;bottom:0;right:0;">
   <script>
     draw3p(function(config, done) {
+      if (typeof window.context.master.adCalls === 'undefined') {
+        window.context.master.adCalls = [];
+      }
         if (window.context && window.context.isMaster) {
-            loadPrebidJS(setTargeting.bind(null, config, done));
-        } else {
-            window.context.computeInMasterFrame(window, 1, function() {
-                pbjs.que.push(function() {
-                  pbjs.onEvent('bidWon', function() {
-                    console.log('BID WON EVENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-                  });
-                });
-            }, function() {
-                  config.targeting = getTargeting(config.slot);
-                  done(config);
-            });
+            loadPrebidJS();
         }
+        console.log('config: ', config);
+        window.context.master.adCalls.push(setTargeting.bind(null, config, done));
     }, ['doubleclick'], ['prebidapp.com']);
   </script>
 </div>

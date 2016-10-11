@@ -16,4 +16,4 @@ You should see an AppNexus Prebid.js ad in one of the two `amp-ad` components on
 
 Remaining issues:
 -[ ] Render multiple ad placements
--[ ] postMessage bugs 
+-[ ] postMessage bugs
