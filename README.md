@@ -18,4 +18,4 @@ You should see an AppNexus Prebid.js ad in each of the two `amp-ad` components o
 
 Remaining issues:
 -[X] Render multiple ad placements
--[ ] render bugs
+-[ ] render bugs  
